@@ -2,29 +2,33 @@ import axios from 'axios';
 import BackendAPI from './HttpVeriables';
 const HttpServices = {
     async postWithoutHeaders (url,data) {
-        return await axios.post(
-            `${BackendAPI}/${url}`,
-            data
-        )
+        return await axios({
+            method: 'POST',
+            url: `${BackendAPI}/${url}`,
+            headers: {'content-type': 'application/json'},
+            data: data
+        })
     },
     async postWithHeaders (url,data) {
-        return await axios.post(
-            url= `${BackendAPI}/${url}`,
-            data= data,
-            // headers = {
-            //     'content-type': 'application/json',
-            //     'token' : localStorage.getItem('token')
-            // }
-        )
+        return await axios({
+            method: 'POST',
+            url: `${BackendAPI}/${url}`,
+            headers: {
+                'content-type': 'application/json',
+                'token' : localStorage.getItem('token')
+            },
+            data: data
+        })
     },
     async get (url) {
-        return await axios.get(
-            url= `${BackendAPI}/${url}`,
-            // headers = {
-            //     'content-type': 'application/json',
-            //     'token' : localStorage.getItem('token')
-            // }
-        )
+        return await axios({
+            method: 'POST',
+            url: `${BackendAPI}/${url}`,
+            headers: {
+                'content-type': 'application/json',
+                'token' : localStorage.getItem('token')
+            }
+        })
     },
 }
 

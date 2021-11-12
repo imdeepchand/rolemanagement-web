@@ -1,21 +1,28 @@
-import React from "react";
+import React, { Component } from "react";
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
-const Home = () => {
-  const [isLogout, setLogout] = React.useState(false);
-  const logoutHandler = (e) => {
+class Home extends Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      isLogout: false,
+      role: localStorage.getItem("role")
+    }
+  }
+   logoutHandler = (e) => {
     e.preventDefault();
     localStorage.clear();
-    setLogout(true);
+    this.setState({isLogout: true});
   };
-  if (isLogout) {
+  render() {
+  if (this.state.isLogout) {
     return <Redirect to="/login" />;
   } else {
     return (
       <div>
         <h1>Site Under Developement!</h1>
         <h2>Home Page</h2>
-        {localStorage.getItem("role") === "user"? (
-          <button className="btn btn-warning" onClick={logoutHandler}>
+        {this.state.role === "user"? (
+          <button className="btn btn-primary" onClick={this.logoutHandler}>
             Logout
           </button>
         ) : (
@@ -25,5 +32,6 @@ const Home = () => {
     );
   }
 };
+}
 
 export default Home;

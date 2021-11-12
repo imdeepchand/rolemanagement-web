@@ -1,26 +1,34 @@
-import React from "react";
+import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
-const Dashboard = () => {
-  const [isLogout, setLogout] = React.useState(false);
-  const logoutHandler = (e) => {
+class Dashboard extends Component{
+  // const [isLogout, setLogout] = React.useState(false);
+  constructor(props) {
+    super(props);
+    this.state= {
+      isLogout: false
+    }
+  }
+   logoutHandler = (e) => {
     e.preventDefault();
     localStorage.clear();
-    setLogout(true);
+    this.setState({isLogout:true});
   };
-  if (isLogout) {
+  render() {
+  if (this.state.isLogout) {
     return <Redirect to="/login" />;
   } else {
     return (
       <div>
         <h1>Site Under Developement!</h1>
         <h2>Admin Dashboard</h2>
-        <button className="btn btn-warning" onClick={logoutHandler}>
+        <button className="btn btn-primary" onClick={this.logoutHandler}>
           Logout
         </button>
       </div>
     );
   }
 };
+}
 
 export default Dashboard;
